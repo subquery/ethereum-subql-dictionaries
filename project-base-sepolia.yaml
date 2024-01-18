@@ -1,0 +1,30 @@
+specVersion: 1.0.0
+version: 0.0.1
+name: base-testnet-dictionary
+description: >-
+  This project can be use as a starting point for developing your
+  new Ethereum SubQuery project
+runner:
+  node:
+    name: '@subql/node-ethereum'
+    version: '>=3.0.0'
+    options:
+      unfinalizedBlocks: false
+      historical: false
+  query:
+    name: '@subql/query'
+    version: '*'
+schema:
+  file: ./schema.graphql
+network:
+  chainId: '11155111'
+  endpoint:
+    - https://rpc.sepolia.org
+dataSources:
+  - kind: ethereum/Runtime
+    startBlock: 1
+    mapping:
+      file: "./dist/index.js"
+      handlers:
+        - handler: handleBlock
+          kind: ethereum/BlockHandler
